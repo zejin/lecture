@@ -12,11 +12,31 @@ with questions for class!
     in your calculation.  (We will return to this question again after
     we cover some computer architecture.)
     
+    theoretical peak flop rate
+        nodes
+            16 flop/cycle * 8 node * 6 core * 2.4 GHz = 15163.2 Gflop/s
+        accelerator boards
+            16 flop/cycle * 15 accelerator * 60 core * 1.053 GHz = 1843.2 Gflop/s
+        cluster
+            15163.2 + 1843.2 = 17006.4 Gflop/s
+    
+    URLs for where I got the parameters in my calculation
+        nodes
+            http://ark.intel.com/products/83352/Intel-Xeon-Processor-E5-2620-v3-15M-Cache-2_40-GHz
+        accelerator boards
+            http://ark.intel.com/products/71992/Intel-Xeon-Phi-Coprocessor-5110P-8GB-1_053-GHz-60-core
+
 2.  What is the approximate theoretical peak flop rate for your own machine?
+
+    16 flop/cycle * 2 core * 2.9 GHz = 92.8 Gflop/s
 
 3.  Suppose there are t tasks that can be executed in a pipeline
     with p stages.  What is the speedup over serial execution of the
     same tasks?
+
+    serial time = t * p
+    parallel time = p + (t - 1)
+    speedup = t * p / [p + (t - 1)]
 
 4.  Consider the following list of tasks (assume they can't be pipelined):
 
@@ -30,6 +50,12 @@ with questions for class!
     What is the minimum serial time between starting to compile and having
     a compiled application?  What is the minimum parallel time given
     an arbitrary number of processors?
+
+    serial time = 1 + 0.5 + 0.25 + 0.5 + 0.5 = 2.75
+    
+    GCC - OpenMPI	    - application 
+        - OpenBLAS - LAPACK  
+    parallel time = 1 + max(0.5, 0.25 + 0.5) + 0.5 = 2.25
 
 5.  Clone the membench repository from GitHub:
 

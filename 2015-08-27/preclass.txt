@@ -20,7 +20,7 @@
     What is the theoretically achievable throughput (tasks/time)?
 
     number of independent tasks = k
-    time = k * alpha + tau
+    time of k independent tasks = k * alpha + tau
     theoretically achievable throughput = k / (k * alpha + tau) = 1 / (alpha + tau / k) ~ 1 / alpha
 
 3.  Under what circumstances is it best to not tune?
@@ -42,6 +42,8 @@
             16 flop/cycle * 8 node * 6 core * 2.4 GHz = 15163.2 Gflop/s
         accelerator boards
             16 flop/cycle * 15 accelerator * 60 core * 1.053 GHz = 1843.2 Gflop/s
+        cluster
+            15163.2 + 1843.2 = 17006.4 Gflop/s
     
     URLs for where I got the parameters in my calculation
         nodes
