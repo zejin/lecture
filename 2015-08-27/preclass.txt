@@ -7,14 +7,27 @@
     according to Amdahl's law for up to 128 cores.  If you know how,
     you should use a script to produce this plot, with both the serial
     fraction and the maximum number of cores as parameters.
-
+   
+    alpha = fraction of the serial work that cannot be parallelized = 0.1
+    p = number of cores
+    speedup = 1 / [alpha + (1 - alpha) / p]
+    efficiency = 1 / (alpha * p + 1 - alpha)
+    
 2.  Suppose a particular program can be partitioned into perfectly
     independent tasks, each of which takes time tau.  Tasks are
     set up, scheduled, and communicated to p workers at a (serial)
     central server; this takes an overhead time alpha per task.
     What is the theoretically achievable throughput (tasks/time)?
 
+    number of independent tasks = k 
+    time = k * alpha + tau
+    theoretically achievable throughput = k / (k * alpha + tau) = 1 / (alpha + tau / k) ~ 1 / alpha
+
 3.  Under what circumstances is it best to not tune?
+
+    a. If the human time is more expensive than the computation time saved
+    b. If tuning for performance means making a mess of the code base
+    c. It doesn't make sense to tune something that already takes little time
 
 4.  The class cluster consists of eight nodes and fifteen Xeon Phi
     accelerator boards.  Based on an online search for information on
@@ -24,4 +37,19 @@
     in your calculation.  (We will return to this question again after
     we cover some computer architecture.)
     
+    theoretical peak flop rate 
+        nodes
+            16 flop/cycle * 8 node * 6 core * 2.4 GHz = 15163.2 Gflop/s
+        accelerator boards
+            16 flop/cycle * 15 accelerator * 60 core * 1.053 GHz = 1843.2 Gflop/s
+    
+    URLs for where I got the parameters in my calculation
+        nodes 
+            http://ark.intel.com/products/83352/Intel-Xeon-Processor-E5-2620-v3-15M-Cache-2_40-GHz
+        accelerator boards
+            http://ark.intel.com/products/71992/Intel-Xeon-Phi-Coprocessor-5110P-8GB-1_053-GHz-60-core
+
 5.  What is the approximate theoretical peak flop rate for your own machine?
+
+    16 flop/cycle * 2 core * 2.9 GHz = 92.8 Gflop/s
+
