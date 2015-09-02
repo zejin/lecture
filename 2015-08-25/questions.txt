@@ -18,6 +18,28 @@ In practice, this took X time.  This includes
 Consider the following questions:
 
 1. What is a simple model that would predict this time?
+  Time to start the process = S
+  Time to compute row counts = M * t_count
+  Time for the instructor to gather counts = N * t_gather	  
+  Time for instructor to do the arithmetic = N * t_arith
+    
+  where M = number of students in one row
+        N = number of rows
+	t_count = time to count one student
+        t_gather = time to gather a count
+        t_arith = time to do an addition 
+
+  Then X = S + M * t_count + N * t_gather + N * t_arith
+
 2. What about a simple model to predict time for one person to count?
+  Total number of students = M * N
+  Total time to count all students = M * N * t_count
+
+  Then Y = M * N * t_count
+
 3. How big should the class be before the parallel method takes less time?
+
+  X < Y 
+  if and only if 
+  S + M * t_count + N * t_gather + N * t_arith < M * N * t_count
 
