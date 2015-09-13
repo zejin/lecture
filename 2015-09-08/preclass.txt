@@ -22,29 +22,76 @@ something into an already-full cache.
 the memory-based AI of this code? (Hint: What is the memory-based AI of just the
 innermost loop?)
 
+store one element from A and one element from B
+
+# flops = 2 * N^3
+# bytes transferred between memory and cache 
+= read A for N times + read B for N times + read C + write C
+= (N * N^2 + N * N^2 + N^2 + N^2) * 8
+= 16 * N^3 + 16 * N^2
+
+AI = 2 * N^3 / (16 * N^3 + 16 * N^2) = N / (8 * N + 8) ~ 1 / 8
 
 2. Now suppose that the cache is substantially larger than 16N, but
 substantially smaller than 8N^2. What is the AI now?
 
+store one row from A and all columns from B iteratively
+
+# flops = 2 * N^3
+# bytes transferred between memory and cache 
+= read A + read B for N times + read C + write C
+= (N^2 + N * N^2 + N^2 + N^2) * 8
+= 8 * N^3 + 24 * N^2
+
+AI = 2 * N^3 / (8 * N^3 + 24 * N^2) = N / (4 * N + 12) ~ 1 / 4
 
 3. Now suppose the cache is large enough to hold all of A, B, and C. What is the
 AI now? (Hint: Writing to a byte of memory not already in the cache incurs two
 memory transfers: one to move the data to the cache for writing, and one to move
 the written data back to main memory.)
 
+store all rows from A and all columns from B 
+
+# flops = 2 * N^3
+# bytes transferred between memory and cache 
+= read A + read B + read C + write C
+= (N^2 + N^2 + N^2 + N^2) * 8
+= 32 * N^2
+
+AI = 2 * N^3 / (32 * N^2) = N / 16
 
 4. Cache overflowing. On my CPU (Intel i7-4700 HQ), L1, L2, and L3 caches are 32
 KB, 256 KB, and 6 MB respectively. What is the largest problem size N that will
 fit in each cache? What is the arithmetic intensity associated with each problem
 size?
 
+The memory to hold A, B and C = 3 * 8 * N^2 = 24 * N^2 bytes
+
+24 * N^2 <= 32 * 2^10
+N <= 36
+
+24 * N^2 <= 256 * 2^10
+N <= 104
+
+24 * N^2 <= 6 * 2^20
+N <= 512
 
 5. My CPU has 4 cores, each of which can do 8 fused multiply-adds per cycle, has
 a clock rate of 2.4 GHz, and a memory bandwidth of 25.6 GB/s. At what arithmetic
 intensity does my machine become CPU-bound?
 
+2 flop/FMA * 8 FMA/cycle * 4 core * 2.4 GHz = 153.6 Gflop/s
+
+arithmetic intensity = flops / memory access = 153.6 / 25.6 = 6
 
 6. So, for what size range for N will naive matmul be CPU-bound on my machine?
 
+memory-bound when N / 16 < 6
+CPU-bound when N / 16 >= 6
+
+Therefore CPU-bound when N >= 96
 
 7. So, what will a plot of Flops/sec vs N look like?
+
+Gflops/s = N / 16 * 25.6, N < 96
+           153.6,         N >= 96

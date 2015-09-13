@@ -14,11 +14,11 @@ with questions for class!
     
     theoretical peak flop rate
         nodes
-            16 flop/cycle * 8 node * 6 core * 2.4 GHz = 15163.2 Gflop/s
+            16 flop/cycle * 8 node * 12 core * 2.4 GHz = 3686.4 Gflop/s
         accelerator boards
-            16 flop/cycle * 15 accelerator * 60 core * 1.053 GHz = 1843.2 Gflop/s
+            16 flop/cycle * 15 accelerator * 60 core * 1.053 GHz = 15163.2 Gflop/s
         cluster
-            15163.2 + 1843.2 = 17006.4 Gflop/s
+            3686.4 + 15163.2 = 18849.6 Gflop/s
     
     URLs for where I got the parameters in my calculation
         nodes
