@@ -69,6 +69,10 @@ with questions for class!
     timings-heat.pdf; what can you tell about the cache architecture
     on your machine from the plot?
 
+    vertical: 64B line size
+    horizontal: 64KB L1, 256KB L2, 3MB L3
+    diagonal: 8-way cache associativity for L1 & L2, direct mapped for L3
+
 6.  From the cloned repository, check out the totient branch:
 
        git checkout totient
@@ -77,6 +81,10 @@ with questions for class!
     If you prefer, you can also look at the files on GitHub.  Either
     way, repeat the exercise of problem 5.  What can you tell about
     the cache architecture of the totient nodes?
+
+    vertical: 64B line size, 4KB page size
+    horizontal: 64KB L1, 256KB L2, 15MB L3
+    diagonal: 8-way cache associativity, 512 entry L2 TLB
 
 7.  Implement the following three methods of computing the centroid
     of a million two-dimensional coordinates (double precision).
@@ -95,3 +103,15 @@ with questions for class!
     compiler.  To do this, run "module load cs5220" and run (e.g.)
 
         icc -o centroid centroid.c
+
+    gcc -O0 -fopenmp -o centroid centroid.c centroid_timer.c
+
+    Result: 1.07382e+09 1.07378e+09
+    Version 1: 7.867071e-02 (0.508448 GFLop/s)
+    Result: 1.07382e+09 1.07378e+09
+    Version 2: 1.561791e-01 (0.256116 GFLop/s)
+    Result: 1.07383e+09 1.07378e+09
+    Version 3: 1.551020e-01 (0.257895 GFLop/s)
+
+
+
