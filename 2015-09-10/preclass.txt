@@ -3,12 +3,39 @@
    host cores are used, for the moment).  How do things change with
    the addition of the two Phi boards?
 
+   for one node:
+
+       peak flop rate = 16 flop/cycle * 12 core * 2.4 GHz = 460.8 Gflop/s
+       max memory bandwidth = 59 GB/s
+       operational intensity at ridge point = 460.8 Gflop/s / 59 GB/s = 7.81 flops/B
+
+       roofline diagram:
+       attainable flop rate = operational intensity * 59, operational intensity < 7.81
+                              460.8,                      operational intensity >= 7.81
+
+   for one node and two boards:
+
+       peak flop rate = 16 flop/cycle * 12 core * 2.4 GHz + 16 flop/cycle * 2 board * 60 core * 1.053 GHz
+                      = 2482.56 Gflop/s
+       max memory bandwidth = 59 GB/s + 2 * 320 GB/s = 699 GB/s
+       operational intensity at ridge point = 2482.56 Gflop/s / 699 GB/s = 3.55 flops/B
+
+       roofline diagram:
+       attainable flop rate = operational intensity * 699, operational intensity < 3.55
+                              2482.56,                     operational intensity >= 3.55
+
 2. What is the difference between two cores and one core with
    hyperthreading?
+
+   Unlike a traditional dual-processor configuration that uses two separate physical processors, the logical processors in a hyper-threaded core share the execution resources. These resources include the execution engine, caches, and system bus interface; the sharing of resources allows two logical processors to work with each other more efficiently, and allows a stalled logical processor to borrow resources from the other one.
 
 3. Do a Google search to find a picture of how memories are arranged
    on the Phi architecture.  Describe the setup briefly in your own
    words.  Is the memory access uniform or non-uniform?
+
+   The core contains a 32-KB 8-way set associative L1 data and instruction cache. There are 512 KB per core L2 cache shared among four threads and there is a hardware prefetcher to prefetch cache data. The L2 caches between the cores are fully coherent.
+
+   The 2D mesh topology is nonuniform, because the cores at the edges and corners have fewer communication channels and hence less bandwidth available to them.
 
 4. Consider the parallel dot product implementations suggested in the
    slides.  As a function of the number of processors, the size of the
@@ -17,3 +44,13 @@
    [Note that dot products have low arithmetic intensity -- the
     roofline model may be useful for reasoning about the peak
     performance for computing pieces of the dot product]
+
+   number of processors = p
+   size of vectors = k
+   typical time to send a message = s
+   typical time to do a flop = t
+
+   serial time = 2 * k * t
+   parallel time = 2 * k * t / p + p * s 
+   speedup = 2 * k * t / (2 * k * t / p + p * s) = p / [1 + p^2 * s / (2 * k * t)]
+

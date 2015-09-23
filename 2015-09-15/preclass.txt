@@ -4,6 +4,8 @@ If you run "make glider", you can see a small example of running
 the glider pattern for a few generations.
 
 0.  How much time did you spend on this pre-class exercise, and when?
+	
+    10:30 pm on Monday
 
 1.  What are one or two points that you found least clear in the
     9/15 slide decks (including the narration)?
