@@ -10,11 +10,39 @@ the glider pattern for a few generations.
 1.  What are one or two points that you found least clear in the
     9/15 slide decks (including the narration)?
 
+    on page 12:
+
+    what is buffer? what is rank? How it works?
+
+    copy local particles to current buf
+    for phase = 1:p
+      send current buf to rank+1 (mod p)
+      recv next buf from rank-1 (mod p) 
+      interact local particles with current buf
+      swap current buf with next buf
+    end
+
 2.  In the basic implementation provided, what size board for the Game
     of Life would fit in L3 cache for one of the totient nodes?  Add a
     timer to the code and run on the totient node.  How many cells per
     second can we update for a board that fits in L3 cache?  For a
     board that does not fit?
+
+    number of chars on current board and previous board = 2 * (n + 2)^2 
+    size of each char = 1 B
+    size of current board and previous board = 2 * (n + 2)^2 * 1 = 2 * (n + 2)^2 B
+
+    size of L3 cache = 15 MB
+
+    to fit in L3 cache
+    2 * (n + 2)^2 <= 15 * 2^20
+    n <= 2802
+
+    run 1000 generations for board size = 100
+    Cells / sec: 1.260777e+08
+    
+    run 10 generations for board size = 4000
+    Cells / sec: 1.254981e+08
 
 3.  Assuming that we want to advance time by several generations,
     suggest a blocking strategy that would improve the operational
@@ -22,11 +50,23 @@ the glider pattern for a few generations.
     not dilute, so that we must still consider every cell.  You may
     want to try your hand at implementing your strategy (though you
     need not spend too much time on it).
+    
+    coarse blocking with generation skipping
+    
+    a. divide the board into smaller blocks
+    b. for each block, we store it with its k layers of boundary cells
+    c. for each block, we update it for k generations without communication
+
+    iterate step b and c to get the result
 
 4.  Comment on what would be required to parallelize this code
     according to the domain decomposition strategy outlined in the
     slides.  Do you think you would see good speedups on one of
     the totient nodes?  Why or why not?
+
+    we are required to synchronize all threads, and make sure that blocks are updated before they communicate with each other.
+    
+    If we trade computation against communication and have low surface area-to-volume ratios on domain, we will see good speedups. Otherwise, we will not.
 
 5.  Suppose we want to compute long-range interactions between two
     sets of particles in parallel using the obvious n^2 algorithm in a
@@ -51,3 +91,9 @@ the glider pattern for a few generations.
     Based on what you know about memories and parallel architecture,
     do you see any features of this approach that are likely to lead
     to poor performance?
+
+    reasons for poor performance:
+    
+    a. we need synchronization via lock or barrier on each particle
+    b. large number of particles cannot fit in the cache
+
