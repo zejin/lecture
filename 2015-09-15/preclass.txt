@@ -11,7 +11,7 @@ the glider pattern for a few generations.
 1.  What are one or two points that you found least clear in the
     9/15 slide decks (including the narration)?
 
-    on page 12:
+    on page 11:
 
     what is buffer? what is rank? How it works?
 
@@ -40,10 +40,10 @@ the glider pattern for a few generations.
     n <= 2802
 
     run 1000 generations for board size = 100
-    Cells / sec: 1.260777e+08
+    Cells / sec: 3.331536e+08
     
     run 10 generations for board size = 4000
-    Cells / sec: 1.254981e+08
+    Cells / sec: 3.061010e+08
 
 3.  Assuming that we want to advance time by several generations,
     suggest a blocking strategy that would improve the operational
@@ -65,9 +65,9 @@ the glider pattern for a few generations.
     slides.  Do you think you would see good speedups on one of
     the totient nodes?  Why or why not?
 
-    we are required to synchronize all threads, and make sure that blocks are updated before they communicate with each other.
+    we are required to synchronize all threads, and make sure that blocks are updated before they communicate with each other
     
-    If we trade computation against communication and have low surface area-to-volume ratios on domain, we will see good speedups. Otherwise, we will not.
+    we will see good speedups if we trade computation against communication and have low surface area-to-volume ratios on domain 
 
 5.  Suppose we want to compute long-range interactions between two
     sets of particles in parallel using the obvious n^2 algorithm in a

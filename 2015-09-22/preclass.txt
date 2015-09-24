@@ -1,7 +1,18 @@
 0.  How much time did you spend on this pre-class exercise, and when?
 
+    1 hours 20 minutes
+    4:00 pm on Wednesday
+
 1.  What are one or two points that you found least clear in the
     9/22 slide decks (including the narration)?
+
+    on page 11:
+
+    how the deadlock example works?
+
+    on page 14:
+
+    why the algorithm is O(p^2)?
 
 2.  The pthread_mc.c file in the demo subdirectory runs a Monte Carlo
     simulation to estimate the expected value of a uniform random
@@ -13,16 +24,59 @@
        time per trial (t_trial), and time to update the global
        counters in the critical section (t_update).
 
+       computation = N * t_trial / p 
+       synchronization = N * t_update / b
+       run time = computation + synchronization = N * t_trial / p + N * t_update / b
+
     b) Run the code with a few different parameter values in order
        to estimate N, t_trial, and t_update for this code on
        a totient compute node.
+
+       --- Run input parameters:
+       rtol:      1.000000e-08
+       maxtrials: 10000000000
+       nbatch:    10000
+       0.499998 (2.88671e-06) from 10000240000 trials
+       24 threads (pthreads): 5.593444e+00 s
+       --- Run input parameters:
+       rtol:      1.000000e-08
+       maxtrials: 10000000000
+       nbatch:    20000
+       0.499998 (2.88667e-06) from 10000480000 trials
+       24 threads (pthreads): 5.580343e+00 s
+       --- Run input parameters:
+       rtol:      1.000000e-08
+       maxtrials: 10000000000
+       nbatch:    10000
+       0.499999 (2.88669e-06) from 10000480000 trials
+       48 threads (pthreads): 5.575427e+00 s
+
+       N = 10000000000
+       p = 24 or 48
+       b = 10000 or 20000
+      
+       10000240000 * t_trial / 24 + 10000240000 * t_update / 10000 = 5.593444
+       10000480000 * t_trial / 24 + 10000480000 * t_update / 20000 = 5.580343
+       10000480000 * t_trial / 48 + 10000480000 * t_update / 10000 = 5.575427
+
+       10000480000 * t_update / 20000 = 5.593444 - 5.580343
+       t_update = 2.62007e-8 s
+
+       10000480000 * t_trial / 48 = 5.593444 - 5.575427
+       t_trial = 8.64774e-11 s
 
     c) Based on your model, suggest a strategy for choosing the batch
        size.  How might you generalize this strategy to automatically
        choose batch sizes for different types of computational
        experiments?
     
+       on one hand, choose the largest batch size to amortize the synchronization cost based on my model
+       on the other hand, larger batch size leads to more computation cost since it get slower to converge
+
 3.  In the workq subdirectory of this directory, there is a basic work
     queue implementation.  Following the strategy outlined in the
     slides, add synchronization calls in the locations marked TODO.
     You should run the code to make sure it behaves as expected!
+
+
+

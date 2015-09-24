@@ -12,6 +12,8 @@ that you can figure out the numerical jargon.
 1.  What are one or two points that you found least clear in the
     9/17 slide decks (including the narration)?
 
+    on page 8, 9 and 10:
+
     explicit time steps and batching time steps
 
 2.  Fill in the most straightforward implementation you can think of
