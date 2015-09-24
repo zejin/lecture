@@ -34,35 +34,25 @@
        rtol:      1.000000e-08
        maxtrials: 10000000000
        nbatch:    10000
-       0.499998 (2.88671e-06) from 10000240000 trials
-       24 threads (pthreads): 5.593444e+00 s
+       0.499997 (2.88671e-06) from 10000240000 trials
+       24 threads (pthreads): 5.593126e+00 s
        --- Run input parameters:
        rtol:      1.000000e-08
        maxtrials: 10000000000
        nbatch:    20000
-       0.499998 (2.88667e-06) from 10000480000 trials
-       24 threads (pthreads): 5.580343e+00 s
-       --- Run input parameters:
-       rtol:      1.000000e-08
-       maxtrials: 10000000000
-       nbatch:    10000
-       0.499999 (2.88669e-06) from 10000480000 trials
-       48 threads (pthreads): 5.575427e+00 s
+       0.499998 (2.88668e-06) from 10000480000 trials
+       24 threads (pthreads): 5.582978e+00 s
 
        N = 10000000000
        p = 24 or 48
        b = 10000 or 20000
       
-       10000240000 * t_trial / 24 + 10000240000 * t_update / 10000 = 5.593444
-       10000480000 * t_trial / 24 + 10000480000 * t_update / 20000 = 5.580343
-       10000480000 * t_trial / 48 + 10000480000 * t_update / 10000 = 5.575427
+       10000240000 * t_trial / 24 + 10000240000 * t_update / 10000 = 5.593126
+       10000480000 * t_trial / 24 + 10000480000 * t_update / 20000 = 5.582978
 
-       10000480000 * t_update / 20000 = 5.593444 - 5.580343
-       t_update = 2.62007e-8 s
-
-       10000480000 * t_trial / 48 = 5.593444 - 5.575427
-       t_trial = 8.64774e-11 s
-
+       t_trial = 1.33738e-8 s
+       t_update = 2.05635e-8 s
+       
     c) Based on your model, suggest a strategy for choosing the batch
        size.  How might you generalize this strategy to automatically
        choose batch sizes for different types of computational

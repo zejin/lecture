@@ -34,23 +34,32 @@
        rtol:      1.000000e-04
        maxtrials: 10000000
        nbatch:    1000
-       0.499968 (9.12018e-05) from 10024000 trials
-       24 threads (OpenMP): 2.857304e-02 s
+       0.500004 (9.11996e-05) from 10024000 trials
+       24 threads (OpenMP): 1.130219e-01 s
        --- Run input parameters:
        rtol:      1.000000e-04
        maxtrials: 10000000
        nbatch:    2000
-       0.499949 (9.10922e-05) from 10048000 trials
-       24 threads (OpenMP): 5.704117e-02 s
+       0.499924 (9.10782e-05) from 10048000 trials
+       24 threads (OpenMP): 8.553386e-02 s
 
        N = 10000000
        p = 24
        b = 1000 or 2000
 
+       10024000 * t_trial / 24 + 10024000 * t_update / 1000 = 1.130219e-01
+       10048000 * t_trial / 24 + 10048000 * t_update / 2000 = 8.553386e-02
+
+       t_trial = 1.37998e-7 s
+       t_update = 5.52521e-6 s
+
     c) Based on your model, suggest a strategy for choosing the batch
        size.  How might you generalize this strategy to automatically
        choose batch sizes for different types of computational
        experiments?
+
+       on one hand, choose the largest batch size to amortize the synchronization cost based on my model
+       on the other hand, larger batch size leads to more computation cost since it get slower to converge
 
 3.  The "OpenMP pitfalls" paper describes some common pitfalls (both
     performance and correctness) in OpenMP codes.  Go through the
