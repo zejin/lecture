@@ -6,12 +6,10 @@
 1.  What are one or two points that you found least clear in the
     9/22 slide decks (including the narration)?
 
-    on page 11:
-
+    on page 11 of Basics:
     how the deadlock example works?
 
-    on page 14:
-
+    on page 14 of MC example:
     why the algorithm is O(p^2)?
 
 2.  The pthread_mc.c file in the demo subdirectory runs a Monte Carlo
