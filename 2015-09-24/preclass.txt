@@ -34,24 +34,24 @@
        rtol:      1.000000e-04
        maxtrials: 10000000
        nbatch:    1000
-       0.500004 (9.11996e-05) from 10024000 trials
-       24 threads (OpenMP): 1.130219e-01 s
+       0.499942 (9.12692e-05) from 10001000 trials
+       1 threads (OpenMP): 6.979489e-02 s
        --- Run input parameters:
        rtol:      1.000000e-04
        maxtrials: 10000000
        nbatch:    2000
-       0.499924 (9.10782e-05) from 10048000 trials
-       24 threads (OpenMP): 8.553386e-02 s
+       0.499942 (9.12645e-05) from 10002000 trials
+       1 threads (OpenMP): 6.964016e-02 s
 
        N = 10000000
-       p = 24
+       p = 1
        b = 1000 or 2000
 
-       10024000 * t_trial / 24 + 10024000 * t_update / 1000 = 1.130219e-01
-       10048000 * t_trial / 24 + 10048000 * t_update / 2000 = 8.553386e-02
+       10001000 * t_trial / 1 + 10001000 * t_update / 1000 = 6.979489e-02
+       10002000 * t_trial / 1 + 10002000 * t_update / 2000 = 6.964016e-02
 
-       t_trial = 1.37998e-7 s
-       t_update = 5.52521e-6 s
+       t_trial = 6.94646e-9 s
+       t_update = 3.23353e-8 s
 
     c) Based on your model, suggest a strategy for choosing the batch
        size.  How might you generalize this strategy to automatically
@@ -65,5 +65,7 @@
     performance and correctness) in OpenMP codes.  Go through the
     checklist in the paper for omp_mc.c.  What performance mistakes
     are there in the demonstration implementation?
+
+    use of critical when atomic would be sufficient
 
 
