@@ -46,4 +46,6 @@
        MPI_Isend(send_buf, nper, MPI_DOUBLE, next, phase, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
        MPI_Irecv(recv_buf, nper, MPI_DOUBLE, prev, phase, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
+       MPI_Wait(request, status);
+
        memcpy(curr_buf, recv_buf, nper * sizeof(double));
