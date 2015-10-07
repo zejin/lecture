@@ -67,5 +67,3 @@
     are there in the demonstration implementation?
 
     use of critical when atomic would be sufficient
-
-
