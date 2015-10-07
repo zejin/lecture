@@ -54,4 +54,3 @@
 5.  What is the approximate theoretical peak flop rate for your own machine?
 
     16 flop/cycle * 2 core * 2.9 GHz = 92.8 Gflop/s
-

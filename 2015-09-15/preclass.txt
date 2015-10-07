@@ -96,4 +96,3 @@ the glider pattern for a few generations.
     
     a. we need synchronization via lock or barrier on each particle
     b. large number of particles cannot fit in the cache
-

@@ -88,5 +88,3 @@ that you can figure out the numerical jargon.
     if we divide the grid u[#, #] into smaller blocks and make a block with its ghost nodes fit in the cache, there is still advantages to such an organization even if there is only one core available
 
 
-
-

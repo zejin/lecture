@@ -42,4 +42,3 @@ Consider the following questions:
   X < Y
   if and only if
   S + M * t_count + N * t_gather + N * t_arith < M * N * t_count
-

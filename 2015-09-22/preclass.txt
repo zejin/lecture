@@ -36,23 +36,23 @@
        maxtrials: 10000000000
        nbatch:    10000
        0.499997 (2.88671e-06) from 10000240000 trials
-       24 threads (pthreads): 5.593126e+00 s
+       24 threads (pthreads): 5.590347e+00 s
        --- Run input parameters:
        rtol:      1.000000e-08
        maxtrials: 10000000000
        nbatch:    20000
-       0.499998 (2.88668e-06) from 10000480000 trials
-       24 threads (pthreads): 5.582978e+00 s
+       0.499997 (2.88668e-06) from 10000480000 trials
+       24 threads (pthreads): 5.583317e+00 s
 
        N = 10000000000
        p = 24 or 48
        b = 10000 or 20000
       
-       10000240000 * t_trial / 24 + 10000240000 * t_update / 10000 = 5.593126
-       10000480000 * t_trial / 24 + 10000480000 * t_update / 20000 = 5.582978
+       10000240000 * t_trial / 24 + 10000240000 * t_update / 10000 = 5.590347
+       10000480000 * t_trial / 24 + 10000480000 * t_update / 20000 = 5.583317
 
-       t_trial = 1.33738e-8 s
-       t_update = 2.05635e-8 s
+       t_trial = 1.33821e-8 s
+       t_update = 1.43276e-8 s
        
     c) Based on your model, suggest a strategy for choosing the batch
        size.  How might you generalize this strategy to automatically
@@ -67,5 +67,4 @@
     slides, add synchronization calls in the locations marked TODO.
     You should run the code to make sure it behaves as expected!
 
-
-
+    gcc -std=c99 -o workq workq.c -lpthread -lm

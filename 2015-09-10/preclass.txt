@@ -53,4 +53,3 @@
    serial time = 2 * k * t
    parallel time = 2 * k * t / p + p * s 
    speedup = 2 * k * t / (2 * k * t / p + p * s) = p / [1 + p^2 * s / (2 * k * t)]
-
