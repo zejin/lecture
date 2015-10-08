@@ -26,7 +26,7 @@
 
     a) In your own words, describe what ring.c is doing.
 
-       calculate the sum of absolute difference between each element and all elements in its process and previous process  
+       calculate the sum of absolute difference between one element and elements in all processes
 
     b) How might you modify the code to have the same computational
        pattern, but using non-blocking communication rather than
@@ -46,6 +46,6 @@
        MPI_Isend(send_buf, nper, MPI_DOUBLE, next, phase, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
        MPI_Irecv(recv_buf, nper, MPI_DOUBLE, prev, phase, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-       MPI_Wait(request, status);
+       MPI_Waitall(2, request, status);
 
        memcpy(curr_buf, recv_buf, nper * sizeof(double));
